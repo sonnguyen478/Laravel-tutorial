@@ -2,5 +2,14 @@
 
 
 @section('content')
-    <h1>{{$title}}</h1>
+    <section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">{{$title}}</h1>
+        <p class="lead text-muted">This is my first laravel project that make from learning the online course.</p>
+        <p>
+        <a href="/login" class="btn btn-primary my-2">Login</a>
+        <a href="/register" class="btn btn-secondary my-2">Register</a>
+        </p>
+    </div>
+    </section>    
 @endsection
