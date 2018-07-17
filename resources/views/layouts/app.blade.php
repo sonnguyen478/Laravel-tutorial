@@ -71,10 +71,15 @@
             </div>
         </nav>
 
-        @include ('inc.navbar')
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
+    @include ('inc.navbar')
+    <div class="container">
+        @include('inc.messages')
+        @yield('content')
+    </div>
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>    
 </body>
 </html>
