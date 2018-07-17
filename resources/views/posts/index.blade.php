@@ -6,7 +6,7 @@
         @foreach ($posts as  $post)
             <div class="list-group-item">
                 <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                <small>Created at {{$post->created_at}}</small>
+                <small>Created at {{$post->created_at}} by {{$post->user->name}}</small>
             </div>  
         @endforeach
         {{$posts->links()}}
