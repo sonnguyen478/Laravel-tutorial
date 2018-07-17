@@ -72,9 +72,9 @@
         </nav>
 
         @include ('inc.navbar')
-        <main class="py-4">
+        <div class="container">
             @yield('content')
-        </main>
+        </div>
     </div>
 </body>
 </html>

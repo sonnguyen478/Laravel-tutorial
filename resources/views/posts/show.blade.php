@@ -7,5 +7,5 @@
         {{$post->contain}}
     </div>
     <hr>
-    <small>Written on {{$post->created_ate}}</small>
+    <small>Written on {{$post->created_at}}</small>
 @endsection

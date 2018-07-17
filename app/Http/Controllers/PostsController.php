@@ -27,7 +27,7 @@ class PostsController extends Controller
         $posts = Post::orderBy('title','desc')->get();
 
         // Split the post by page
-        $posts = Post::orderBy('title','desc')->paginate();
+        $posts = Post::orderBy('title','desc')->paginate(1);
 
         return view('posts.index') -> with('posts',$posts);
     }
@@ -39,7 +39,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -50,7 +50,12 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        return 1;
     }
 
     /**
