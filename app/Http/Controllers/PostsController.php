@@ -63,15 +63,38 @@ class PostsController extends Controller
         $this->validate($request,[
             'title'=> 'required',
             'body'=> 'required',
+            'cover_image'=>'image|nullable|max:1999',
         ]);
 
-        //return 123; 
+        // Handle file upload
+        if ($request->hasFile('cover_image'))
+        {
+            // Get file name with the extension
+            $fileNameWithExt = $request->file('cover_image')->getClientOriginalImage();
+
+            // Get just file name
+            $fileName = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+
+            // Get judt extension
+            $extension = $request->file('cover_image')->getOriginalClientExtension();
+
+            // File name to store
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+
+            // Upload image
+            $path = $request->file('cover_image')->storeAs('public/cover_image',$fileNameToStore);
+        }
+        else
+        {
+            $fileNameToStore = 'noImage.jpg';
+        }
 
         // Create post
         $post = new Post;
         $post->title = $request->input('title');
         $post->contain = $request->input('body');
         $post->user_id = auth()->user()->id;
+        $post->cover_image = $fileNameToStore;
         $post->save();
 
         return redirect('/posts')->with('success', 'Post created');
@@ -145,7 +168,7 @@ class PostsController extends Controller
         {
             return redirect('/posts')->with('error','Unauthorized Page');
         }
-                
+
         $post->delete();
         return redirect('/posts')->with('success', 'Post Removed');
     }
